@@ -8,6 +8,7 @@
 
 class USpringArmComponent;
 class UCameraComponent;
+class USInterationComponent;
 
 UCLASS()
 class UE_ACTIONGAME_API ASCharacter : public ACharacter
@@ -30,6 +31,9 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* CameraComp;
 	
+	UPROPERTY(VisibleAnywhere)
+	USInterationComponent* InterationComp;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
@@ -38,6 +42,9 @@ protected:
 	void MoveRight(float Value);
 
 	void PrimaryAttack();
+
+	void PrimaryInteract();
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
