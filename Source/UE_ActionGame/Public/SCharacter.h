@@ -9,6 +9,7 @@
 class USpringArmComponent;
 class UCameraComponent;
 class USInterationComponent;
+class UAnimMontage;
 
 UCLASS()
 class UE_ACTIONGAME_API ASCharacter : public ACharacter
@@ -16,23 +17,31 @@ class UE_ACTIONGAME_API ASCharacter : public ACharacter
 	GENERATED_BODY()
 
 protected:
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<AActor> ProjectileClass;
+	UPROPERTY(EditAnywhere, Category = "Attack")
+		TSubclassOf<AActor> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+		UAnimMontage* AttackAnim;
+
+	FTimerHandle TimerHandle_PrimaryAttack;
+
 public:
 	// Sets default values for this character's properties
 	ASCharacter();
 
 protected:
 
-	
-	UPROPERTY(VisibleAnywhere)
-	USpringArmComponent* SpringArmComp;
 
 	UPROPERTY(VisibleAnywhere)
-	UCameraComponent* CameraComp;
-	
+		USpringArmComponent* SpringArmComp;
+
 	UPROPERTY(VisibleAnywhere)
-	USInterationComponent* InterationComp;
+		UCameraComponent* CameraComp;
+
+	UPROPERTY(VisibleAnywhere)
+		USInterationComponent* InterationComp;
+
+
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -43,9 +52,11 @@ protected:
 
 	void PrimaryAttack();
 
+	void PrimaryAttack_TimeElapsed();
+
 	void PrimaryInteract();
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
